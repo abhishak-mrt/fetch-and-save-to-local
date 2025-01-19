@@ -1,0 +1,41 @@
+name: Fetch Secrets from Azure Key Vault
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  fetch-secrets:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository (optional)
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Azure
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      # Step 3: Fetch Secrets from Azure Key Vault
+      - name: Get Secrets from Azure Key Vault
+        id: get-secrets
+        uses: azure/get-keyvault-secrets@v1
+        with:
+          keyvault: ${{ secrets.AZURE_KEY_VAULT }}
+          secrets: |
+            SECRET1
+            SECRET2
+            SECRET3
+
+      # Step 4: Use the secrets (example)
+      - name: Use Secrets
+        run: |
+          echo "Fetched SECRET1: ${{ steps.get-secrets.outputs.SECRET1 }}"
+          echo "Fetched SECRET2: ${{ steps.get-secrets.outputs.SECRET2 }}"
+          echo "Fetched SECRET3: ${{ steps.get-secrets.outputs.SECRET3 }}"
