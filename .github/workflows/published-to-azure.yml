@@ -36,3 +36,8 @@ jobs:
             --vault-name ${{ secrets.AZURE_KEY_VAULT }} \
             --name "SECRET_TO_UPLOAD" \
             --value "${{ secrets.SECRET_TO_UPLOAD }}"
+     # Step 4: debug log for upload secret to Azure Key Vault
+      - name: Debug Secret Upload
+        run: |
+         echo "Vault Name: ${{ secrets.AZURE_KEY_VAULT }}"
+         echo "Secret Name: MY_SECRET_NAME"
