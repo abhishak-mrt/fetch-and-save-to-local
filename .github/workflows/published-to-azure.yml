@@ -30,6 +30,7 @@ jobs:
 
       # Step 3: Upload a secret to Azure Key Vault
       - name: Upload Secret to Azure Key Vault
+        shell: pwsh
         run: |
           az keyvault secret set \
             --vault-name ${{ secrets.AZURE_KEY_VAULT }} \
