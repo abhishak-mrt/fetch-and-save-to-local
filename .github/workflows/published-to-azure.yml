@@ -32,7 +32,7 @@ jobs:
       - name: Upload Secret to Azure Key Vault
         shell: pwsh
         run: |
-          az keyvault secret set --vault-name ${{ secrets.AZURE_KEY_VAULT }} --name "sqlprofilesecret" --value "${{ secrets.SECRET_TO_UPLOAD }}"
+          az keyvault secret set --vault-name ${{ secrets.AZURE_KEY_VAULT }} --name "sqlprofilesecrets" --value "${{ secrets.SECRET_TO_UPLOAD }}"
                       
      # Step 4: debug log for upload secret to Azure Key Vault
       - name: Debug Secret Upload
