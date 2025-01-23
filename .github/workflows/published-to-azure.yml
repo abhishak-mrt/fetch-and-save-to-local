@@ -33,5 +33,5 @@ jobs:
         run: |
           az keyvault secret set \
             --vault-name ${{ secrets.AZURE_KEY_VAULT }} \
-            --name "my-github-keyvault" \
+            --name "SECRET_TO_UPLOAD" \
             --value "${{ secrets.SECRET_TO_UPLOAD }}"
